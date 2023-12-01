@@ -1,0 +1,7 @@
+{
+  "type": "module",
+  "dependencies": {},
+  "devDependencies": {
+    "bun-types": "^1.0.14"
+  }
+}
