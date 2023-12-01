@@ -8,6 +8,8 @@ function ex1() {
 
 ex1();
 
+console.log("\n");
+
 function ex2() {
   console.log("input:", input);
 }
