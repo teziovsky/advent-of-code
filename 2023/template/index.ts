@@ -2,32 +2,32 @@ const file = Bun.file(import.meta.dir + "/input.txt");
 
 export const input = await file.text();
 
-const splitted = input.split("\n");
+const rows = input.split("\n");
 
 function ex1() {
   let result = 0;
 
-  splitted.forEach((line) => {
-    if (!line) return;
-    console.log("line:", line);
+  rows.forEach((row) => {
+    if (!row) return;
+    console.log("row:", row);
   });
 
   console.log("EX1 result: ", result);
 }
 
-ex1();
-
-console.log("\n");
-
 function ex2() {
   let result = 0;
 
-  splitted.forEach((line) => {
-    if (!line) return;
-    console.log("line:", line);
+  rows.forEach((row) => {
+    if (!row) return;
+    console.log("row:", row);
   });
 
   console.log("EX2 result: ", result);
 }
 
-ex2();
+console.log("-----------------------");
+ex1();
+// console.log("-----------------------");
+// ex2();
+// console.log("-----------------------");

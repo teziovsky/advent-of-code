@@ -2,7 +2,7 @@ const file = Bun.file(import.meta.dir + "/input.txt");
 
 const input = await file.text();
 
-const splitted = input.split("\n");
+const rows = input.split("\n");
 
 function ex1() {
   const maxReds = 12;
@@ -11,11 +11,11 @@ function ex1() {
 
   let result = 0;
 
-  splitted.forEach((line) => {
-    if (!line) return;
-    const gameNumber = parseInt(line.split(" ")[1]?.replace(":", ""));
+  rows.forEach((row) => {
+    if (!row) return;
+    const gameNumber = parseInt(row.split(" ")[1]?.replace(":", ""));
 
-    const subsets = line.replace(/Game \d+: /, "").split("; ");
+    const subsets = row.replace(/Game \d+: /, "").split("; ");
 
     let redsPossible: boolean[] = [];
     let greensPossible: boolean[] = [];
@@ -55,16 +55,21 @@ function ex1() {
   console.log("EX1 result: ", result);
 }
 
-ex1();
-
-console.log("\n");
+function extractNumber(subset: string, color: string) {
+  return parseInt(
+    subset
+      .split(", ")
+      .filter((x) => x.includes(`${color}`))?.[0]
+      ?.replace(` ${color}`, "")
+  );
+}
 
 function ex2() {
   let result = 0;
 
-  splitted.forEach((line) => {
-    if (!line) return;
-    const subsets = line.replace(/Game \d+: /, "").split("; ");
+  rows.forEach((row) => {
+    if (!row) return;
+    const subsets = row.replace(/Game \d+: /, "").split("; ");
 
     let redsValues: number[] = [];
     let greensValues: number[] = [];
@@ -102,13 +107,8 @@ function ex2() {
   console.log("EX1 result: ", result);
 }
 
+console.log("-----------------------");
+ex1();
+console.log("-----------------------");
 ex2();
-
-function extractNumber(subset: string, color: string) {
-  return parseInt(
-    subset
-      .split(", ")
-      .filter((x) => x.includes(`${color}`))?.[0]
-      ?.replace(` ${color}`, "")
-  );
-}
+console.log("-----------------------");

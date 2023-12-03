@@ -1,10 +1,12 @@
 const file = Bun.file(import.meta.dir + "/input.txt");
 
-export const input = await file.text();
+const input = await file.text();
+
+const rows = input.split("\n");
 
 function ex1() {
-  const result = input.split("\n").reduce((sum, line) => {
-    const numbers = line.match(/\d/g);
+  const result = rows.reduce((sum, row) => {
+    const numbers = row.match(/\d/g);
 
     if (!numbers) return sum;
 
@@ -14,10 +16,6 @@ function ex1() {
 
   console.log("EX1 Result: ", result);
 }
-
-ex1();
-
-console.log("\n");
 
 function ex2() {
   const numberWordsMap = {
@@ -32,8 +30,8 @@ function ex2() {
     nine: 9,
   };
 
-  const result = input.split("\n").reduce((sum, line) => {
-    const fromLeft = line.match(/\d|one|two|three|four|five|six|seven|eight|nine/g);
+  const result = rows.reduce((sum, row) => {
+    const fromLeft = row.match(/\d|one|two|three|four|five|six|seven|eight|nine/g);
 
     if (!fromLeft) return sum;
 
@@ -43,9 +41,9 @@ function ex2() {
       ? numberWordsMap[fromLeftFirst as keyof typeof numberWordsMap]
       : parseInt(fromLeftFirst);
 
-    const reversedLine = line.split("").reverse().join("");
+    const reversedrow = row.split("").reverse().join("");
 
-    const fromRight = reversedLine.match(/\d|eno|owt|eerht|ruof|evif|xis|neves|thgie|enin/g);
+    const fromRight = reversedrow.match(/\d|eno|owt|eerht|ruof|evif|xis|neves|thgie|enin/g);
 
     if (!fromRight) return sum;
 
@@ -62,4 +60,8 @@ function ex2() {
   console.log("EX2 Result: ", result);
 }
 
+console.log("-----------------------");
+ex1();
+console.log("-----------------------");
 ex2();
+console.log("-----------------------");
