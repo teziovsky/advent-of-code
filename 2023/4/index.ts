@@ -1,15 +1,11 @@
-const file = Bun.file(import.meta.dir + "/input.txt");
+import { type FileNames, loadFile } from "../utils";
 
-export const input = await file.text();
+async function ex1(fileName: FileNames) {
+  const rows = await loadFile(fileName);
 
-const rows = input.split("\n");
-
-function ex1() {
-  let result = 0;
-
-  rows.forEach((row) => {
-    if (!row) return;
-    const [cardNumber, cardNumbers] = row.split(": ");
+  return rows.reduce((acc, row) => {
+    if (!row) return acc;
+    const [_, cardNumbers] = row.split(": ");
 
     const [winningNumbers, myNumbers] = cardNumbers.split(" | ");
 
@@ -21,13 +17,13 @@ function ex1() {
 
     const myPoints = myWiningNumbers.reduce((acc, num, index) => (index === 0 ? acc + 1 : acc * 2), 0);
 
-    result += myPoints;
-  });
-
-  console.log("EX1 result: ", result);
+    return acc + myPoints;
+  }, 0);
 }
 
-function ex2() {
+async function ex2(fileName: FileNames) {
+  const rows = await loadFile(fileName);
+
   const cards: Record<string, { points: number; copies: number }> = {};
   let result = 0;
 
@@ -40,7 +36,7 @@ function ex2() {
 
   rows.forEach((row, rowIndex) => {
     if (!row) return;
-    const [cardNumber, cardNumbers] = row.split(": ");
+    const [_, cardNumbers] = row.split(": ");
 
     const [winningNumbers, myNumbers] = cardNumbers.split(" | ");
 
@@ -68,11 +64,13 @@ function ex2() {
     result += points + copies;
   }
 
-  console.log("EX2 result: ", result);
+  console.log(`EX2 ${fileName}: `, result);
 }
 
 console.log("-----------------------");
-ex1();
+console.log("EX1 Test Result: ", await ex1("test1"));
+console.log("EX1 Input Result: ", await ex1("input"));
 console.log("-----------------------");
-ex2();
+await ex2("test2");
+await ex2("input");
 console.log("-----------------------");

@@ -1,11 +1,9 @@
-const file = Bun.file(import.meta.dir + "/input.txt");
+import { type FileNames, loadFile } from "../utils";
 
-const input = await file.text();
+async function ex1(fileName: FileNames) {
+  const rows = await loadFile(fileName);
 
-const rows = input.split("\n");
-
-function ex1() {
-  const result = rows.reduce((sum, row) => {
+  return rows.reduce((sum, row) => {
     const numbers = row.match(/\d/g);
 
     if (!numbers) return sum;
@@ -13,11 +11,11 @@ function ex1() {
     const number = parseInt(`${numbers.at(0)}${numbers.at(-1)}`);
     return isNaN(number) ? sum : sum + number;
   }, 0);
-
-  console.log("EX1 Result: ", result);
 }
 
-function ex2() {
+async function ex2(fileName: FileNames) {
+  const rows = await loadFile(fileName);
+
   const numberWordsMap = {
     one: 1,
     two: 2,
@@ -30,7 +28,7 @@ function ex2() {
     nine: 9,
   };
 
-  const result = rows.reduce((sum, row) => {
+  return rows.reduce((sum, row) => {
     const fromLeft = row.match(/\d|one|two|three|four|five|six|seven|eight|nine/g);
 
     if (!fromLeft) return sum;
@@ -56,12 +54,12 @@ function ex2() {
     const number = parseInt(`${first}${last}`);
     return isNaN(number) ? sum : sum + number;
   }, 0);
-
-  console.log("EX2 Result: ", result);
 }
 
 console.log("-----------------------");
-ex1();
+console.log("EX1 Test Result: ", await ex1("test1"));
+console.log("EX1 Input Result: ", await ex1("input"));
 console.log("-----------------------");
-ex2();
+console.log("EX2 Test Result: ", await ex2("test2"));
+console.log("EX2 Result: ", await ex2("input"));
 console.log("-----------------------");

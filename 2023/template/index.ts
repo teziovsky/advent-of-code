@@ -1,33 +1,26 @@
-const file = Bun.file(import.meta.dir + "/input.txt");
+import { type FileNames, loadFile } from "../utils";
 
-export const input = await file.text();
+async function ex1(fileName: FileNames) {
+  const rows = await loadFile(fileName);
 
-const rows = input.split("\n");
-
-function ex1() {
-  let result = 0;
-
-  rows.forEach((row) => {
-    if (!row) return;
-    console.log("row:", row);
-  });
-
-  console.log("EX1 result: ", result);
+  return rows.reduce((acc, row) => {
+    if (!row) return acc;
+    return acc;
+  }, 0);
 }
 
-function ex2() {
-  let result = 0;
+async function ex2(fileName: FileNames) {
+  const rows = await loadFile(fileName);
 
-  rows.forEach((row) => {
-    if (!row) return;
-    console.log("row:", row);
-  });
-
-  console.log("EX2 result: ", result);
+  return rows.reduce((acc, row) => {
+    if (!row) return acc;
+    return acc;
+  }, 0);
 }
 
+console.log("EX1 Test Result: ", await ex1("test1"));
+console.log("EX1 Input Result: ", await ex1("input"));
 console.log("-----------------------");
-ex1();
-// console.log("-----------------------");
-// ex2();
-// console.log("-----------------------");
+console.log("EX2 Test Result: ", await ex2("test2"));
+console.log("EX2 Result: ", await ex2("input"));
+console.log("-----------------------");

@@ -1,18 +1,14 @@
-const file = Bun.file(import.meta.dir + "/input.txt");
+import { type FileNames, loadFile } from "../utils";
 
-const input = await file.text();
+async function ex1(fileName: FileNames) {
+  const rows = await loadFile(fileName);
 
-const rows = input.split("\n");
-
-function ex1() {
   const maxReds = 12;
   const maxGreens = 13;
   const maxBlues = 14;
 
-  let result = 0;
-
-  rows.forEach((row) => {
-    if (!row) return;
+  return rows.reduce((acc, row) => {
+    if (!row) return acc;
     const gameNumber = parseInt(row.split(" ")[1]?.replace(":", ""));
 
     const subsets = row.replace(/Game \d+: /, "").split("; ");
@@ -48,11 +44,11 @@ function ex1() {
     });
 
     if (redsPossible.every(Boolean) && greensPossible.every(Boolean) && bluesPossible.every(Boolean)) {
-      result += gameNumber;
+      return acc + gameNumber;
     }
-  });
 
-  console.log("EX1 result: ", result);
+    return acc;
+  }, 0);
 }
 
 function extractNumber(subset: string, color: string) {
@@ -64,11 +60,11 @@ function extractNumber(subset: string, color: string) {
   );
 }
 
-function ex2() {
-  let result = 0;
+async function ex2(fileName: FileNames) {
+  const rows = await loadFile(fileName);
 
-  rows.forEach((row) => {
-    if (!row) return;
+  return rows.reduce((acc, row) => {
+    if (!row) return acc;
     const subsets = row.replace(/Game \d+: /, "").split("; ");
 
     let redsValues: number[] = [];
@@ -101,14 +97,14 @@ function ex2() {
 
     const power = red * green * blue;
 
-    result += power;
-  });
-
-  console.log("EX1 result: ", result);
+    return acc + power;
+  }, 0);
 }
 
 console.log("-----------------------");
-ex1();
+console.log("EX1 Test Result: ", await ex1("test1"));
+console.log("EX1 Input Result: ", await ex1("input"));
 console.log("-----------------------");
-ex2();
+console.log("EX2 Test Result: ", await ex2("test2"));
+console.log("EX2 Result: ", await ex2("input"));
 console.log("-----------------------");
