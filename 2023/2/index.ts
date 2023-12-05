@@ -1,7 +1,7 @@
-import { type FileNames, loadFile } from "../utils";
+import { type Path, loadFile } from "../utils";
 
-async function ex1(fileName: FileNames) {
-  const rows = await loadFile(fileName);
+async function ex1(path: Path) {
+  const rows = await loadFile(path);
 
   const maxReds = 12;
   const maxGreens = 13;
@@ -60,8 +60,8 @@ function extractNumber(subset: string, color: string) {
   );
 }
 
-async function ex2(fileName: FileNames) {
-  const rows = await loadFile(fileName);
+async function ex2(path: Path) {
+  const rows = await loadFile(path);
 
   return rows.reduce((acc, row) => {
     if (!row) return acc;
@@ -102,9 +102,9 @@ async function ex2(fileName: FileNames) {
 }
 
 console.log("-----------------------");
-console.log("EX1 Test Result: ", await ex1("test1"));
-console.log("EX1 Input Result: ", await ex1("input"));
+console.log("EX1 Test Result: ", await ex1("2/test1"));
+console.log("EX1 Input Result: ", await ex1("2/input"));
 console.log("-----------------------");
-console.log("EX2 Test Result: ", await ex2("test2"));
-console.log("EX2 Result: ", await ex2("input"));
+console.log("EX2 Test Result: ", await ex2("2/test2"));
+console.log("EX2 Result: ", await ex2("2/input"));
 console.log("-----------------------");

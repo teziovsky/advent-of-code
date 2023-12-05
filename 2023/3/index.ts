@@ -1,10 +1,8 @@
-const file = Bun.file(import.meta.dir + "/input.txt");
+import { type Path, loadFile } from "../utils";
 
-export const input = await file.text();
+async function ex1(path: Path) {
+  const rows = await loadFile(path);
 
-const rows = input.split("\n");
-
-function ex1() {
   let result = 0;
 
   rows.forEach((row, i) => {
@@ -54,10 +52,12 @@ function ex1() {
     });
   });
 
-  console.log("EX1 result: ", result);
+  return result;
 }
 
-function ex2() {
+async function ex2(path: Path) {
+  const rows = await loadFile(path);
+
   let result = 0;
 
   rows.forEach((row, i) => {
@@ -127,11 +127,13 @@ function ex2() {
     });
   });
 
-  console.log("EX2 result: ", result);
+  return result;
 }
 
 console.log("-----------------------");
-ex1();
+console.log("EX1 Test Result: ", await ex1("3/test1"));
+console.log("EX1 Input Result: ", await ex1("3/input"));
 console.log("-----------------------");
-ex2();
+console.log("EX2 Test Result: ", await ex2("3/test2"));
+console.log("EX2 Result: ", await ex2("3/input"));
 console.log("-----------------------");

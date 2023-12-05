@@ -1,7 +1,7 @@
-import { type FileNames, loadFile } from "../utils";
+import { type Path, loadFile } from "../utils";
 
-async function ex1(fileName: FileNames) {
-  const rows = await loadFile(fileName);
+async function ex1(path: Path) {
+  const rows = await loadFile(path);
 
   return rows.reduce((acc, row) => {
     if (!row) return acc;
@@ -21,8 +21,8 @@ async function ex1(fileName: FileNames) {
   }, 0);
 }
 
-async function ex2(fileName: FileNames) {
-  const rows = await loadFile(fileName);
+async function ex2(path: Path) {
+  const rows = await loadFile(path);
 
   const cards: Record<string, { points: number; copies: number }> = {};
   let result = 0;
@@ -64,13 +64,13 @@ async function ex2(fileName: FileNames) {
     result += points + copies;
   }
 
-  console.log(`EX2 ${fileName}: `, result);
+  return result;
 }
 
 console.log("-----------------------");
-console.log("EX1 Test Result: ", await ex1("test1"));
-console.log("EX1 Input Result: ", await ex1("input"));
+console.log("EX1 Test Result: ", await ex1("4/test1"));
+console.log("EX1 Input Result: ", await ex1("4/input"));
 console.log("-----------------------");
-await ex2("test2");
-await ex2("input");
+console.log("EX2 Test Result: ", await ex2("4/test2"));
+console.log("EX2 Input Result: ", await ex2("4/input"));
 console.log("-----------------------");
