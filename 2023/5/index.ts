@@ -40,7 +40,6 @@ async function ex1(path: Path) {
   }[] = [];
 
   seeds.forEach((seed, index) => {
-    console.log("seed:", seed);
     results.push({ seed, soil: 0, fertilizer: 0, water: 0, light: 0, temperature: 0, humidity: 0, location: 0 });
 
     Object.entries(maps).forEach(([category, map]) => {
@@ -51,13 +50,15 @@ async function ex1(path: Path) {
       map.forEach((row) => {
         const [destStart, sourceStart, rangeLength] = row;
 
-        for (let i = 0; i < rangeLength; i++) {
-          const sourceEl = sourceStart + i;
-          const destEl = destStart + i;
+        if (sourceStart <= value && value <= sourceStart + rangeLength) {
+          for (let i = 0; i < rangeLength; i++) {
+            const sourceEl = sourceStart + i;
+            const destEl = destStart + i;
 
-          if (results[index][source] === sourceEl) {
-            value = destEl;
-            break;
+            if (results[index][source] === sourceEl) {
+              value = destEl;
+              break;
+            }
           }
         }
       });
@@ -106,6 +107,7 @@ async function ex2(path: Path) {
   }
 
   console.log("seeds:", seeds);
+  console.log("maps:", maps);
 
   const results: {
     seed: number;
@@ -119,43 +121,46 @@ async function ex2(path: Path) {
   }[] = [];
 
   seeds.forEach((seed, index) => {
-    console.log("seed:", seed);
+    console.log(`seed-${index}:`, seed);
     results.push({ seed, soil: 0, fertilizer: 0, water: 0, light: 0, temperature: 0, humidity: 0, location: 0 });
 
     Object.entries(maps).forEach(([category, map]) => {
       const [source, destination] = category.split("-to-");
 
+      let value = results[index][source];
+
       map.forEach((row) => {
         const [destStart, sourceStart, rangeLength] = row;
 
-        if (sourceStart <= results[index][source] && results[index][source] <= sourceStart + rangeLength) {
+        if (sourceStart <= value && value <= sourceStart + rangeLength) {
           for (let i = 0; i < rangeLength; i++) {
             const sourceEl = sourceStart + i;
             const destEl = destStart + i;
 
             if (results[index][source] === sourceEl) {
-              results[index][destination] = destEl;
+              value = destEl;
               break;
             }
           }
-        } else {
-          results[index][destination] = results[index][source];
         }
       });
+
+      if (value) {
+        results[index][destination] = value;
+      }
     });
   });
-
-  console.log("results:", results);
 
   return Math.min(...results.map((result) => result.location));
 }
 
+console.log("-----------------------");
 // console.log("EX1 Test Result: ", await ex1("5/test1"));
 // console.log("EX1 Input Result: ", await ex1("5/input"));
-// console.log("-----------------------");
-console.log("EX2 Test Result: ", await ex2("5/test2"));
-// console.log("EX2 Result: ", await ex2("5/input"));
-// console.log("-----------------------");
+console.log("-----------------------");
+// console.log("EX2 Test Result: ", await ex2("5/test2"));
+console.log("EX2 Result: ", await ex2("5/input"));
+console.log("-----------------------");
 
 function parseCategory(str: string) {
   return str.replaceAll(" map:", "");
