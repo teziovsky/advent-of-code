@@ -3,7 +3,6 @@ import { type Path, loadFile } from "../utils";
 async function ex1(path: Path) {
   const lines = await loadFile(path);
 
-  const seeds: number[] = [];
   const maps: Record<string, number[][]> = {
     "seed-to-soil": [],
     "soil-to-fertilizer": [],
@@ -19,75 +18,73 @@ async function ex1(path: Path) {
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
     if (!line) continue;
-    if (line.includes("seeds:")) {
-      seeds.push(...line.replaceAll("seeds: ", "").split(" ").map(Number));
-    } else if (line.includes("map:")) {
+    if (line.includes("map:")) {
       actualCategory = parseCategory(line);
-    } else {
+    } else if (!line.includes("seeds:")) {
       maps[actualCategory].push(line.split(" ").map(Number));
     }
   }
 
-  const results: {
-    seed: number;
-    soil: number;
-    fertilizer: number;
-    water: number;
-    light: number;
-    temperature: number;
-    humidity: number;
-    location: number;
-  }[] = [];
+  let location = Infinity;
 
-  for (let index = 0; index < seeds.length; index++) {
-    results.push({
-      seed: seeds[index],
-      soil: 0,
-      fertilizer: 0,
-      water: 0,
-      light: 0,
-      temperature: 0,
-      humidity: 0,
-      location: 0,
-    });
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    if (!line) continue;
+    if (line.includes("seeds:")) {
+      const seeds = line.replace("seeds: ", "").split(" ").map(Number);
 
-    for (const category in maps) {
-      if (Object.prototype.hasOwnProperty.call(maps, category)) {
-        const map = maps[category];
-        const [source, destination] = category.split("-to-");
-        const resultSource = results[index][source];
-        let value = resultSource;
+      for (const seed of seeds) {
+        const resultEntry = {
+          seed: seed,
+          soil: 0,
+          fertilizer: 0,
+          water: 0,
+          light: 0,
+          temperature: 0,
+          humidity: 0,
+          location: 0,
+        };
 
-        for (let i = 0; i < map.length; i++) {
-          const [destStart, sourceStart, rangeLength] = map[i];
+        for (const category in maps) {
+          if (Object.prototype.hasOwnProperty.call(maps, category)) {
+            const map = maps[category];
+            const [source, destination] = category.split("-to-");
+            const resultSource = resultEntry[source];
+            let value = resultSource;
 
-          if (sourceStart <= value && value <= sourceStart + rangeLength) {
-            for (let j = 0; j < rangeLength; j++) {
-              const sourceEl = sourceStart + j;
-              const destEl = destStart + j;
+            for (let i = 0; i < map.length; i++) {
+              const [destStart, sourceStart, rangeLength] = map[i];
 
-              if (resultSource === sourceEl) {
-                value = destEl;
-                break;
+              if (sourceStart <= value && value <= sourceStart + rangeLength) {
+                for (let j = 0; j < rangeLength; j++) {
+                  const sourceEl = sourceStart + j;
+                  const destEl = destStart + j;
+
+                  if (resultSource === sourceEl) {
+                    value = destEl;
+                    break;
+                  }
+                }
               }
+            }
+
+            if (value) {
+              resultEntry[destination] = value;
             }
           }
         }
 
-        if (value) {
-          results[index][destination] = value;
-        }
+        location = Math.min(location, resultEntry.location);
       }
     }
   }
 
-  return Math.min(...results.map((result) => result.location));
+  return location;
 }
 
 async function ex2(path: Path) {
   const lines = await loadFile(path);
 
-  const seeds: number[] = [];
   const maps: Record<string, number[][]> = {
     "seed-to-soil": [],
     "soil-to-fertilizer": [],
@@ -99,6 +96,18 @@ async function ex2(path: Path) {
   };
 
   let actualCategory = "";
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    if (!line) continue;
+    if (line.includes("map:")) {
+      actualCategory = parseCategory(line);
+    } else if (!line.includes("seeds:")) {
+      maps[actualCategory].push(line.split(" ").map(Number));
+    }
+  }
+
+  let location = Infinity;
 
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
@@ -106,77 +115,61 @@ async function ex2(path: Path) {
     if (line.includes("seeds:")) {
       const groups = line.match(/\d+ \d+/g);
       if (groups) {
-        for (const group of groups) {
-          const [seed, quantity] = group.split(" ").map(Number);
-          for (let i = 0; i < quantity; i++) {
-            seeds.push(seed + i);
-          }
-        }
-      }
-    } else if (line.includes("map:")) {
-      actualCategory = parseCategory(line);
-    } else {
-      maps[actualCategory].push(line.split(" ").map(Number));
-    }
-  }
+        const groupsArr = groups.map((group) => group.split(" ").map(Number)).sort((a, b) => a[0] - b[0]);
+        for (const group of groupsArr) {
+          const [seed, quantity] = group;
 
-  console.log("seeds:", seeds);
-  console.log("maps:", maps);
+          for (let j = 0; j < quantity; j++) {
+            const currentSeed = seed + j;
 
-  const results: {
-    seed: number;
-    soil: number;
-    fertilizer: number;
-    water: number;
-    light: number;
-    temperature: number;
-    humidity: number;
-    location: number;
-  }[] = new Array(seeds.length);
+            const resultEntry = {
+              seed: currentSeed,
+              soil: 0,
+              fertilizer: 0,
+              water: 0,
+              light: 0,
+              temperature: 0,
+              humidity: 0,
+              location: 0,
+            };
 
-  for (let index = 0; index < seeds.length; index++) {
-    results[index] = {
-      seed: seeds[index],
-      soil: 0,
-      fertilizer: 0,
-      water: 0,
-      light: 0,
-      temperature: 0,
-      humidity: 0,
-      location: 0,
-    };
+            for (const category in maps) {
+              if (Object.prototype.hasOwnProperty.call(maps, category)) {
+                const map = maps[category];
+                const [source, destination] = category.split("-to-");
+                const resultSource = resultEntry[source];
+                let value = resultSource;
 
-    for (const category in maps) {
-      if (Object.prototype.hasOwnProperty.call(maps, category)) {
-        const map = maps[category];
-        const [source, destination] = category.split("-to-");
-        const resultSource = results[index][source];
-        let value = resultSource;
+                for (let i = 0; i < map.length; i++) {
+                  const [destStart, sourceStart, rangeLength] = map[i];
 
-        for (let i = 0; i < map.length; i++) {
-          const [destStart, sourceStart, rangeLength] = map[i];
+                  if (sourceStart <= resultSource && resultSource <= sourceStart + rangeLength) {
+                    for (let j = 0; j < rangeLength; j++) {
+                      const sourceEl = sourceStart + j;
+                      const destEl = destStart + j;
 
-          if (sourceStart <= value && value <= sourceStart + rangeLength) {
-            for (let j = 0; j < rangeLength; j++) {
-              const sourceEl = sourceStart + j;
-              const destEl = destStart + j;
+                      if (resultSource === sourceEl) {
+                        value = destEl;
+                        break;
+                      }
+                    }
+                  }
+                }
 
-              if (resultSource === sourceEl) {
-                value = destEl;
-                break;
+                if (value) {
+                  resultEntry[destination] = value;
+                }
               }
             }
-          }
-        }
 
-        if (value) {
-          results[index][destination] = value;
+            location = Math.min(location, resultEntry.location);
+          }
         }
       }
     }
   }
 
-  return Math.min(...results.map((result) => result.location));
+  return location;
 }
 
 // console.log("-----------------------");
