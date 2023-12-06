@@ -1,16 +1,7 @@
-import { type FileNames, loadFile } from "../utils";
+import { type Path, loadFile } from "../utils";
 
-async function ex1(fileName: FileNames) {
-  const rows = await loadFile(fileName);
-
-  return rows.reduce((acc, row) => {
-    if (!row) return acc;
-    return acc;
-  }, 0);
-}
-
-async function ex2(fileName: FileNames) {
-  const rows = await loadFile(fileName);
+async function ex1(path: Path) {
+  const rows = await loadFile(path);
 
   return rows.reduce((acc, row) => {
     if (!row) return acc;
@@ -18,9 +9,18 @@ async function ex2(fileName: FileNames) {
   }, 0);
 }
 
-console.log("EX1 Test Result: ", await ex1("test1"));
-console.log("EX1 Input Result: ", await ex1("input"));
+async function ex2(path: Path) {
+  const rows = await loadFile(path);
+
+  return rows.reduce((acc, row) => {
+    if (!row) return acc;
+    return acc;
+  }, 0);
+}
+
+console.log("EX1 Test Result: ", await ex1("0/test1"));
+console.log("EX1 Input Result: ", await ex1("0/input"));
 console.log("-----------------------");
-console.log("EX2 Test Result: ", await ex2("test2"));
-console.log("EX2 Result: ", await ex2("input"));
+console.log("EX2 Test Result: ", await ex2("0/test2"));
+console.log("EX2 Result: ", await ex2("0/input"));
 console.log("-----------------------");
