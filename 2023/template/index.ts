@@ -18,6 +18,7 @@ async function ex2(path: Path) {
   }, 0);
 }
 
+console.log("-----------------------");
 console.log("EX1 Test Result: ", await ex1("0/test1"));
 console.log("EX1 Input Result: ", await ex1("0/input"));
 console.log("-----------------------");
