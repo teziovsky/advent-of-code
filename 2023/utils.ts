@@ -1,4 +1,4 @@
-export type FileNames = "input" | "test1" | "test2";
+export type FileNames = "input" | `test${number}`;
 
 export type Path = `${number}/${FileNames}`;
 
