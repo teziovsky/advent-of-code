@@ -1,7 +1,7 @@
 import { type Path, loadFile } from "../utils";
 
 async function ex1(path: Path) {
-  const rows = await loadFile(path);
+  const rows = (await loadFile(path)).filter(Boolean);
 
   return rows.reduce((acc, row) => {
     if (!row) return acc;
@@ -10,7 +10,7 @@ async function ex1(path: Path) {
 }
 
 async function ex2(path: Path) {
-  const rows = await loadFile(path);
+  const rows = (await loadFile(path)).filter(Boolean);
 
   return rows.reduce((acc, row) => {
     if (!row) return acc;
