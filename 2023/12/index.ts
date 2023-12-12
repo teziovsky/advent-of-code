@@ -1,7 +1,6 @@
 import { type Path, loadFile } from "../utils";
 
 async function ex(path: Path, copies: number) {
-  console.time(`EX - ${path} - ${copies} copies time`);
   const rows = (await loadFile(path)).filter(Boolean).map((row) => row.split(" "));
 
   const arrangements: number[] = [];
@@ -10,22 +9,13 @@ async function ex(path: Path, copies: number) {
     const characters = Array(copies).fill(rows[i][0]).join("?");
     const numbers = Array(copies).fill(rows[i][1]).join(",").split(",").map(Number);
 
-    let regexStr = "^\\.*";
+    const cache: Record<string, number> = {};
 
-    for (let i = 0; i < numbers.length; i++) {
-      regexStr += "#".repeat(numbers[i]);
-      if (i < numbers.length - 1) regexStr += "\\.+";
-    }
+    const result = getCombinations(characters, numbers, cache);
 
-    regexStr += "\\.*$";
-
-    const regex = new RegExp(regexStr, "gm");
-
-    const combinations = getCombinations(characters, regex);
-
-    arrangements.push(combinations.length);
+    arrangements.push(result);
   }
-  console.timeEnd(`EX - ${path} - ${copies} copies time`);
+
   return arrangements.reduce((acc, curr) => acc + curr, 0);
 }
 
@@ -33,29 +23,44 @@ console.log("-----------------------");
 console.log("EX1 Test Result: ", await ex("12/test1", 1));
 console.log("EX1 Input Result: ", await ex("12/input", 1));
 console.log("-----------------------");
-// console.log("EX2 Test Result: ", await ex("12/test2", 5));
-// console.log("EX2 Result: ", await ex("12/input", 5));
+console.log("EX2 Test Result: ", await ex("12/test2", 5));
+console.log("EX2 Result: ", await ex("12/input", 5));
 console.log("-----------------------");
 
-function getCombinations(str: string, regex: RegExp, memo: Record<string, string[]> = {}) {
-  if (str.indexOf("?") === -1) {
-    return str.match(regex) ? [str] : [];
+function getCombinations(str: string, numbers: number[], cache: Record<string, number>) {
+  if (!str) {
+    return numbers.length === 0 ? 1 : 0;
   }
 
-  if (memo[str]) return memo[str];
+  if (!numbers.length) {
+    return str.includes("#") ? 0 : 1;
+  }
 
-  let combinations: string[] = [];
-  const index = str.indexOf("?");
+  const key: string = `${str}-${numbers.join("-")}`;
 
-  // Replace '?' with '#'
-  const str1 = str.slice(0, index) + "#" + str.slice(index + 1);
-  combinations = combinations.concat(getCombinations(str1, regex, memo));
+  if (key in cache) {
+    return cache[key];
+  }
 
-  // Replace '?' with '.'
-  const str2 = str.slice(0, index) + "." + str.slice(index + 1);
-  combinations = combinations.concat(getCombinations(str2, regex, memo));
+  let result: number = 0;
 
-  memo[str] = combinations;
+  const firstChar = str[0];
+  const firstNumber = numbers[0];
 
-  return combinations;
+  if (firstChar === "." || firstChar === "?") {
+    result += getCombinations(str.slice(1), numbers, cache);
+  }
+
+  if (firstChar === "#" || firstChar === "?") {
+    if (
+      firstNumber <= str.length &&
+      !str.slice(0, firstNumber).includes(".") &&
+      (firstNumber === str.length || str[firstNumber] !== "#")
+    ) {
+      result += getCombinations(str.slice(firstNumber + 1), numbers.slice(1), cache);
+    }
+  }
+
+  cache[key] = result;
+  return result;
 }
