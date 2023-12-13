@@ -1,7 +1,7 @@
 import { type Path, loadFile } from "../utils";
 
-async function ex1(path: Path) {
-  const rows = (await loadFile(path)).filter(Boolean);
+async function ex1(path: Path, delimiter: string = "\n") {
+  const rows = (await loadFile(path, delimiter)).filter(Boolean);
 
   const grid = rows.map((row) => row.split(""));
 
@@ -41,8 +41,8 @@ async function ex1(path: Path) {
   return distances.reduce((acc, distance) => acc + distance, 0);
 }
 
-async function ex2(path: Path) {
-  const rows = (await loadFile(path)).filter(Boolean);
+async function ex2(path: Path, delimiter: string = "\n") {
+  const rows = (await loadFile(path, delimiter)).filter(Boolean);
 
   const grid = rows.map((row) => row.split(""));
 

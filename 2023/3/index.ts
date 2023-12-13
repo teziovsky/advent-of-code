@@ -1,7 +1,7 @@
 import { type Path, loadFile } from "../utils";
 
-async function ex1(path: Path) {
-  const rows = await loadFile(path);
+async function ex1(path: Path, delimiter: string = "\n") {
+  const rows = await loadFile(path, delimiter);
 
   let result = 0;
 
@@ -55,8 +55,8 @@ async function ex1(path: Path) {
   return result;
 }
 
-async function ex2(path: Path) {
-  const rows = await loadFile(path);
+async function ex2(path: Path, delimiter: string = "\n") {
+  const rows = await loadFile(path, delimiter);
 
   let result = 0;
 

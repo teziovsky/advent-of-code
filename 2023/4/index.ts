@@ -1,7 +1,7 @@
 import { type Path, loadFile } from "../utils";
 
-async function ex1(path: Path) {
-  const rows = await loadFile(path);
+async function ex1(path: Path, delimiter: string = "\n") {
+  const rows = await loadFile(path, delimiter);
 
   return rows.reduce((acc, row) => {
     if (!row) return acc;
@@ -21,8 +21,8 @@ async function ex1(path: Path) {
   }, 0);
 }
 
-async function ex2(path: Path) {
-  const rows = await loadFile(path);
+async function ex2(path: Path, delimiter: string = "\n") {
+  const rows = await loadFile(path, delimiter);
 
   const cards: Record<string, { points: number; copies: number }> = {};
   let result = 0;

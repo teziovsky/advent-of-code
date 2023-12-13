@@ -1,7 +1,7 @@
 import { type Path, loadFile } from "../utils";
 
-async function ex1(path: Path) {
-  const lines = (await loadFile(path)).filter(Boolean);
+async function ex1(path: Path, delimiter: string = "\n") {
+  const lines = (await loadFile(path, delimiter)).filter(Boolean);
 
   let startPosition = [0, 0];
 

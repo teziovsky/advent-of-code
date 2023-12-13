@@ -1,7 +1,7 @@
 import { type Path, loadFile } from "../utils";
 
-async function ex1(path: Path) {
-  const lines = await loadFile(path);
+async function ex1(path: Path, delimiter: string = "\n") {
+  const lines = await loadFile(path, delimiter);
 
   const seeds: number[] = lines[0].replace("seeds: ", "").split(" ").map(Number);
   const seedPairs = [];
@@ -46,8 +46,8 @@ async function ex1(path: Path) {
   return Math.min(...seeds);
 }
 
-async function ex2(path: Path) {
-  const lines = await loadFile(path);
+async function ex2(path: Path, delimiter: string = "\n") {
+  const lines = await loadFile(path, delimiter);
 
   let seeds: number[] = lines[0].replace("seeds: ", "").split(" ").map(Number);
 

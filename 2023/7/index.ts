@@ -1,7 +1,7 @@
 import { type Path, loadFile } from "../utils";
 
-async function ex1(path: Path) {
-  const rows = (await loadFile(path)).filter(Boolean);
+async function ex1(path: Path, delimiter: string = "\n") {
+  const rows = (await loadFile(path, delimiter)).filter(Boolean);
 
   const cardStrength: Record<string, number> = {
     A: 13,
@@ -84,8 +84,8 @@ async function ex1(path: Path) {
   return sortedHands.reduce((acc, hand, index) => acc + hand.bid * (index + 1), 0);
 }
 
-async function ex2(path: Path) {
-  const rows = (await loadFile(path)).filter(Boolean);
+async function ex2(path: Path, delimiter: string = "\n") {
+  const rows = (await loadFile(path, delimiter)).filter(Boolean);
 
   const cardStrength: Record<string, number> = {
     A: 13,

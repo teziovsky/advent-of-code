@@ -1,7 +1,7 @@
 import { type Path, loadFile } from "../utils";
 
-async function ex1(path: Path) {
-  const rows = await loadFile(path);
+async function ex1(path: Path, delimiter: string = "\n") {
+  const rows = await loadFile(path, delimiter);
 
   const times = rows[0].match(/\d+/g)?.map(Number) ?? [];
   const records = rows[1].match(/\d+/g)?.map(Number) ?? [];
@@ -26,8 +26,8 @@ async function ex1(path: Path) {
   }, 0);
 }
 
-async function ex2(path: Path) {
-  const rows = await loadFile(path);
+async function ex2(path: Path, delimiter: string = "\n") {
+  const rows = await loadFile(path, delimiter);
 
   const times = rows[0].match(/\d+/g)?.map(Number) ?? [];
   const time = parseInt(times.join(""));

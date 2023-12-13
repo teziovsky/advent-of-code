@@ -1,6 +1,6 @@
 import { type Path, loadFile } from "../utils";
 
-async function ex1(path: Path, delimiter: string) {
+async function ex1(path: Path, delimiter: string = "\n") {
   const [instructionStr, nodesStr] = (await loadFile(path, delimiter)).filter(Boolean);
   const instructions = instructionStr.split("").map((char) => Number(char === "R"));
 
@@ -26,7 +26,7 @@ async function ex1(path: Path, delimiter: string) {
   return steps;
 }
 
-async function ex2(path: Path, delimiter: string) {
+async function ex2(path: Path, delimiter: string = "\n") {
   const [instructionStr, nodesStr] = (await loadFile(path, delimiter)).filter(Boolean);
   const instructions = instructionStr.split("").map((char) => Number(char === "R"));
 

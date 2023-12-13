@@ -1,7 +1,7 @@
 import { type Path, loadFile } from "../utils";
 
-async function ex1(path: Path) {
-  const histories = (await loadFile(path)).filter(Boolean).map((row) => row.split(" ").map(Number));
+async function ex1(path: Path, delimiter: string = "\n") {
+  const histories = (await loadFile(path, delimiter)).filter(Boolean).map((row) => row.split(" ").map(Number));
   let result = 0;
 
   for (const history of histories) {
@@ -32,8 +32,8 @@ async function ex1(path: Path) {
   return result;
 }
 
-async function ex2(path: Path) {
-  const histories = (await loadFile(path)).filter(Boolean).map((row) => row.split(" ").map(Number));
+async function ex2(path: Path, delimiter: string = "\n") {
+  const histories = (await loadFile(path, delimiter)).filter(Boolean).map((row) => row.split(" ").map(Number));
   let result = 0;
 
   for (const history of histories) {

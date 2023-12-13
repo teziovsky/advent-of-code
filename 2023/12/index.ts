@@ -1,7 +1,7 @@
 import { type Path, loadFile } from "../utils";
 
-async function ex(path: Path, copies: number) {
-  const rows = (await loadFile(path)).filter(Boolean).map((row) => row.split(" "));
+async function ex(path: Path, copies: number, delimiter: string = "\n") {
+  const rows = (await loadFile(path, delimiter)).filter(Boolean).map((row) => row.split(" "));
 
   const arrangements: number[] = [];
 
