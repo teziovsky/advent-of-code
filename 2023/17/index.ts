@@ -37,7 +37,7 @@ async function ex(path: Path, minMove: number, maxMove: number, delimiter = "\n"
 
     seen.add(key);
 
-    if (blockColumn === colLength && blockRow === rowLength) {
+    if (blockColumn === colLength && blockRow === rowLength && move >= minMove) {
       return heat + block;
     }
 
@@ -58,10 +58,10 @@ async function ex(path: Path, minMove: number, maxMove: number, delimiter = "\n"
 }
 
 console.log("-----------------------");
-// console.log("EX1 Test Result: ", await ex("17/test1", 0, 3));
-// console.log("EX1 Input Result: ", await ex("17/input", 0, 3));
+console.log("EX1 Test Result: ", await ex("17/test1", 0, 3));
+console.log("EX1 Input Result: ", await ex("17/input", 0, 3));
 console.log("-----------------------");
-// console.log("EX2 Test Result: ", await ex("17/test2", 4, 10));
+console.log("EX2 Test Result: ", await ex("17/test2", 4, 10));
 console.log("EX2 Result: ", await ex("17/input", 4, 10));
 console.log("-----------------------");
 
