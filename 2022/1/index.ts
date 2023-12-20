@@ -1,4 +1,4 @@
-import { type Path, loadFile } from "../utils";
+import { type Path, loadFile } from "../../utils";
 
 async function ex1(path: Path, delimiter: string = "\n") {
   const rows = await (await loadFile(path, delimiter)).filter(Boolean).map((row) =>

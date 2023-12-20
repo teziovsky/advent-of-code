@@ -1,4 +1,4 @@
-import { type Path, loadFile } from "../utils";
+import { type Path, loadFile } from "../../utils";
 
 async function ex(path: Path, copies: number, delimiter: string = "\n") {
   const rows = (await loadFile(path, delimiter)).filter(Boolean).map((row) => row.split(" "));

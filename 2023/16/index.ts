@@ -1,4 +1,4 @@
-import { type Path, loadFile } from "../utils";
+import { type Path, loadFile } from "../../utils";
 
 async function loadGrid(path: Path, delimiter = "\n") {
   return (await loadFile(path, delimiter)).filter(Boolean).map((row) => row.split("").filter(Boolean));

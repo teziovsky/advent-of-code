@@ -1,4 +1,4 @@
-import { type Path, loadFile } from "../utils";
+import { type Path, loadFile } from "../../utils";
 
 async function ex1(path: Path, delimiter: string = "\n") {
   const histories = (await loadFile(path, delimiter)).filter(Boolean).map((row) => row.split(" ").map(Number));
@@ -23,7 +23,7 @@ async function ex1(path: Path, delimiter: string = "\n") {
     let value = 0;
 
     for (let i = 1; i < steps.length; i++) {
-      value += steps[i].at(-1);
+      value += steps[i].at(-1)!;
     }
 
     result += value;

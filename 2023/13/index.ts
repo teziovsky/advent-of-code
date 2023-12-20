@@ -1,4 +1,4 @@
-import { type Path, loadFile } from "../utils";
+import { type Path, loadFile } from "../../utils";
 
 async function ex(path: Path, maxDifferencesCount: number, delimiter = "\n\n") {
   const segments = (await loadFile(path, delimiter)).filter(Boolean).map((segment) =>

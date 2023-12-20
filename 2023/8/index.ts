@@ -1,4 +1,4 @@
-import { type Path, loadFile, LeastCommonMultiple } from "../utils";
+import { type Path, loadFile, LeastCommonMultiple } from "../../utils";
 
 async function ex1(path: Path, delimiter: string = "\n") {
   const [instructionStr, nodesStr] = (await loadFile(path, delimiter)).filter(Boolean);
