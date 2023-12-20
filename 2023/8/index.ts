@@ -1,4 +1,4 @@
-import { type Path, loadFile } from "../utils";
+import { type Path, loadFile, LeastCommonMultiple } from "../utils";
 
 async function ex1(path: Path, delimiter: string = "\n") {
   const [instructionStr, nodesStr] = (await loadFile(path, delimiter)).filter(Boolean);
@@ -72,11 +72,3 @@ console.log("-----------------------");
 console.log("EX2 Test Result: ", await ex2("8/test3", "\n\n"));
 console.log("EX2 Result: ", await ex2("8/input", "\n\n"));
 console.log("-----------------------");
-
-function GreatestCommonDivisor(...nums: number[]): number {
-  return nums.reduce((acc, n) => (!n ? acc : GreatestCommonDivisor(n, acc % n)));
-}
-
-function LeastCommonMultiple(...nums: number[]) {
-  return nums.reduce((acc, n) => (acc * n) / GreatestCommonDivisor(acc, n));
-}
