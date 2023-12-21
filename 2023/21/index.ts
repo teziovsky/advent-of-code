@@ -10,70 +10,39 @@ const DIRECTIONS: Record<string, DIRECTION> = {
 };
 
 async function ex1(path: Path, delimiter = "\n") {
-  const rows = (await loadFile(path, delimiter)).filter(Boolean).map((row) => row.split(""));
+  const map = (await loadFile(path, delimiter)).filter(Boolean).map((row) => row.split(""));
 
-  const startingY = rows.findIndex((row) => row.includes("S"));
-  const startingX = rows[startingY].findIndex((col) => col === "S");
-
-  const map = new Set<string>();
-  map.add(`${startingY},${startingX}`);
-
-  for (let i = 0; i < 64; i++) {
-    const entries = [...map];
-
-    for (const entry of entries) {
-      const [y, x] = entry.split(",").map(Number);
-
-      for (const direction in DIRECTIONS) {
-        const dir = DIRECTIONS[direction];
-        const next = [y + dir[0], x + dir[1]];
-        const nextCol = rows[next[0]]?.[next[1]];
-
-        if (nextCol === "#") continue;
-        else if (nextCol === "." || nextCol === "S") map.add(`${next[0]},${next[1]}`);
-      }
-
-      map.delete(entry);
-    }
-  }
-
-  return map.size;
+  return countPlots(map, 64);
 }
 
 async function ex2(path: Path, delimiter = "\n") {
-  const rows = (await loadFile(path, delimiter)).filter(Boolean).map((row) => row.split(""));
+  const map = (await loadFile(path, delimiter)).filter(Boolean).map((row) => row.split(""));
 
-  const rowsLength = rows.length;
-  const colsLength = rows[0].length;
+  const size = map[0].length;
+  const target = 26_501_365;
+  const remaining = target % size;
 
-  const startingY = rows.findIndex((row) => row.includes("S"));
-  const startingX = rows[startingY].findIndex((col) => col === "S");
+  /**
+   * https://www.reddit.com/r/adventofcode/comments/18nevo3/comment/keb6a53/?context=3
+   * Lagrange's Interpolation formula for ax^2 + bx + c with x=[0,1,2] and y=[y0,y1,y2] we have
+   *   f(x) = (x^2-3x+2) * y0/2 - (x^2-2x)*y1 + (x^2-x) * y2/2
+   * so the coefficients are:
+   * a = y0/2 - y1 + y2/2
+   * b = -3*y0/2 + 2*y1 - y2/2
+   * c = y0
+   */
 
-  const map = new Set<string>();
-  map.add(`${startingY},${startingX}`);
+  const values = [
+    countPlots(map, remaining, true),
+    countPlots(map, remaining + size, true),
+    countPlots(map, remaining + size * 2, true),
+  ];
 
-  const target = 50;
+  const { a, b, c } = simplifyLagrange(values);
 
-  for (let i = 0; i < target; i++) {
-    const entries = [...map];
+  const d = Math.floor(target / size);
 
-    for (const entry of entries) {
-      const [y, x] = entry.split(",").map(Number);
-
-      for (const direction in DIRECTIONS) {
-        const dir = DIRECTIONS[direction];
-        const next = [y + dir[0], x + dir[1]];
-        const nextCol = rows[next[0]]?.[next[1]];
-
-        if (nextCol === "#") continue;
-        else if (nextCol === "." || nextCol === "S") map.add(`${next[0]},${next[1]}`);
-      }
-
-      map.delete(entry);
-    }
-  }
-
-  return map.size;
+  return a * d * d + b * d + c;
 }
 
 console.log("-----------------------");
@@ -81,5 +50,48 @@ console.log("EX1 Test Result: ", await ex1("21/test1"));
 console.log("EX1 Input Result: ", await ex1("21/input"));
 console.log("-----------------------");
 console.log("EX2 Test Result: ", await ex2("21/test2"));
-// console.log("EX2 Result: ", await ex2("21/input"));
+console.log("EX2 Result: ", await ex2("21/input"));
 console.log("-----------------------");
+
+function safeModulo(coord: number, size: number) {
+  return coord < 0 ? (size - (Math.abs(coord) % size)) % size : coord % size;
+}
+
+function countPlots(map: string[][], steps: number, repeatMap = false) {
+  const size = map[0].length;
+
+  const startingY = map.findIndex((row) => row.includes("S"));
+  const startingX = map[startingY].findIndex((col) => col === "S");
+
+  const gardenPlots = new Set<string>([`${startingY},${startingX}`]);
+
+  for (let i = 0; i < steps; i++) {
+    const entries = [...gardenPlots];
+
+    for (const entry of entries) {
+      const [y, x] = entry.split(",").map(Number);
+
+      for (const direction in DIRECTIONS) {
+        const dir = DIRECTIONS[direction];
+        const next = [y + dir[0], x + dir[1]];
+        const tmp = [safeModulo(next[0], size), safeModulo(next[1], size)];
+        const nextCol = repeatMap ? map[tmp[0]]?.[tmp[1]] : map[next[0]]?.[next[1]];
+
+        if (nextCol === "#") continue;
+        else if (nextCol === "." || nextCol === "S") gardenPlots.add(`${next[0]},${next[1]}`);
+      }
+
+      gardenPlots.delete(entry);
+    }
+  }
+
+  return gardenPlots.size;
+}
+
+function simplifyLagrange(values: number[]) {
+  return {
+    a: values[0] / 2 - values[1] + values[2] / 2,
+    b: -3 * (values[0] / 2) + 2 * values[1] - values[2] / 2,
+    c: values[0],
+  };
+}
