@@ -112,10 +112,10 @@ async function ex2(grid: string[][], paths: number[][]) {
   return result;
 }
 
-const { distance: testDistance } = await ex1("10/test1");
-const { distance: test2Distance } = await ex1("10/test2");
-const { grid: testGrid, paths: testPaths } = await ex1("10/test3");
-const { distance, grid, paths } = await ex1("10/input");
+const { distance: testDistance } = await ex1("2023/10/test1");
+const { distance: test2Distance } = await ex1("2023/10/test2");
+const { grid: testGrid, paths: testPaths } = await ex1("2023/10/test3");
+const { distance, grid, paths } = await ex1("2023/10/input");
 
 console.log("-----------------------");
 console.log("EX1 Test Result: ", testDistance);

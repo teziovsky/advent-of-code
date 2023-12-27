@@ -4,10 +4,10 @@
     "module": "ESNext",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-
-    /* Type Checking */
     "strict": true,
     "skipLibCheck": true,
-    "types": ["bun-types"]
+    "moduleResolution": "node",
+    "types": ["bun-types", "lodash"],
+    "baseUrl": "."
   }
 }

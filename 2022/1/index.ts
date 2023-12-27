@@ -1,4 +1,5 @@
-import { type Path, loadFile, sum } from "../../utils";
+import { type Path, loadFile } from "../../utils";
+import { sum } from "lodash";
 
 async function ex1(path: Path, delimiter: string = "\n") {
   const rows = (await loadFile(path, delimiter)).filter(Boolean).map((row) =>
@@ -30,9 +31,9 @@ async function ex2(path: Path, delimiter: string = "\n") {
 }
 
 console.log("-----------------------");
-console.log("EX1 Test Result: ", await ex1("1/test1", "\n\n"));
-console.log("EX1 Input Result: ", await ex1("1/input", "\n\n"));
+console.log("EX1 Test Result: ", await ex1("2022/1/test1", "\n\n"));
+console.log("EX1 Input Result: ", await ex1("2022/1/input", "\n\n"));
 console.log("-----------------------");
-console.log("EX2 Test Result: ", await ex2("1/test2", "\n\n"));
-console.log("EX2 Result: ", await ex2("1/input", "\n\n"));
+console.log("EX2 Test Result: ", await ex2("2022/1/test2", "\n\n"));
+console.log("EX2 Result: ", await ex2("2022/1/input", "\n\n"));
 console.log("-----------------------");

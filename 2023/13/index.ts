@@ -66,9 +66,9 @@ function checkMirror(segment: string[][], maxDifferencesCount: number) {
 }
 
 console.log("-----------------------");
-console.log("EX1 Test Result: ", await ex("13/test1", 0));
-console.log("EX1 Input Result: ", await ex("13/input", 0));
+console.log("EX1 Test Result: ", await ex("2023/13/test1", 0));
+console.log("EX1 Input Result: ", await ex("2023/13/input", 0));
 console.log("-----------------------");
-console.log("EX2 Test Result: ", await ex("13/test2", 1));
-console.log("EX2 Result: ", await ex("13/input", 1));
+console.log("EX2 Test Result: ", await ex("2023/13/test2", 1));
+console.log("EX2 Result: ", await ex("2023/13/input", 1));
 console.log("-----------------------");

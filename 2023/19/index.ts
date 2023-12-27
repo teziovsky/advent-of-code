@@ -139,9 +139,9 @@ async function ex2(path: Path, delimiter = "\n") {
 }
 
 console.log("-----------------------");
-console.log("EX1 Test Result: ", await ex1("19/test1", "\n\n"));
-console.log("EX1 Input Result: ", await ex1("19/input", "\n\n"));
+console.log("EX1 Test Result: ", await ex1("2023/19/test1", "\n\n"));
+console.log("EX1 Input Result: ", await ex1("2023/19/input", "\n\n"));
 console.log("-----------------------");
-console.log("EX2 Test Result: ", await ex2("19/test2", "\n\n"));
-console.log("EX2 Result: ", await ex2("19/input", "\n\n"));
+console.log("EX2 Test Result: ", await ex2("2023/19/test2", "\n\n"));
+console.log("EX2 Result: ", await ex2("2023/19/input", "\n\n"));
 console.log("-----------------------");

@@ -122,9 +122,9 @@ function getEnergizedTiles({ grid, directionX, directionY, positionX, positionY 
 }
 
 console.log("-----------------------");
-console.log("EX1 Test Result: ", await ex1("16/test1"));
-console.log("EX1 Input Result: ", await ex1("16/input"));
+console.log("EX1 Test Result: ", await ex1("2023/16/test1"));
+console.log("EX1 Input Result: ", await ex1("2023/16/input"));
 console.log("-----------------------");
-console.log("EX2 Test Result: ", await ex2("16/test2"));
-console.log("EX2 Result: ", await ex2("16/input"));
+console.log("EX2 Test Result: ", await ex2("2023/16/test2"));
+console.log("EX2 Result: ", await ex2("2023/16/input"));
 console.log("-----------------------");

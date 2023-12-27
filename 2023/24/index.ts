@@ -118,11 +118,11 @@ function nextPrime(a: bigint, b: bigint, base = 1n, mod = 0n) {
 }
 
 console.log("-----------------------");
-console.log("EX1 Test Result: ", await ex1("24/test1"));
-console.log("EX1 Input Result: ", await ex1("24/input"));
+console.log("EX1 Test Result: ", await ex1("2023/24/test1"));
+console.log("EX1 Input Result: ", await ex1("2023/24/input"));
 console.log("-----------------------");
-console.log("EX2 Test Result: ", await ex2("24/test2"));
-console.log("EX2 Result: ", await ex2("24/input"));
+console.log("EX2 Test Result: ", await ex2("2023/24/test2"));
+console.log("EX2 Result: ", await ex2("2023/24/input"));
 console.log("-----------------------");
 
 // Inspired by https://github.com/csaunders-ldt/advent2023/blob/main/day24/solve.ts

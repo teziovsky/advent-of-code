@@ -102,9 +102,9 @@ function extractNumber(subset: string, color: string) {
 }
 
 console.log("-----------------------");
-console.log("EX1 Test Result: ", await ex1("2/test1"));
-console.log("EX1 Input Result: ", await ex1("2/input"));
+console.log("EX1 Test Result: ", await ex1("2023/2/test1"));
+console.log("EX1 Input Result: ", await ex1("2023/2/input"));
 console.log("-----------------------");
-console.log("EX2 Test Result: ", await ex2("2/test2"));
-console.log("EX2 Result: ", await ex2("2/input"));
+console.log("EX2 Test Result: ", await ex2("2023/2/test2"));
+console.log("EX2 Result: ", await ex2("2023/2/input"));
 console.log("-----------------------");

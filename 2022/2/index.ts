@@ -1,4 +1,5 @@
-import { type Path, loadFile, sum } from "../../utils";
+import { sum } from "lodash";
+import { type Path, loadFile } from "../../utils";
 
 const opponent: Record<string, string> = {
   A: "rock",
@@ -78,9 +79,9 @@ async function ex2(path: Path, delimiter = "\n") {
 }
 
 console.log("-----------------------");
-console.log("EX1 Test Result: ", await ex1("2/test1"));
-console.log("EX1 Input Result: ", await ex1("2/input"));
+console.log("EX1 Test Result: ", await ex1("2022/2/test1"));
+console.log("EX1 Input Result: ", await ex1("2022/2/input"));
 console.log("-----------------------");
-console.log("EX2 Test Result: ", await ex2("2/test2"));
-console.log("EX2 Result: ", await ex2("2/input"));
+console.log("EX2 Test Result: ", await ex2("2022/2/test2"));
+console.log("EX2 Result: ", await ex2("2022/2/input"));
 console.log("-----------------------");

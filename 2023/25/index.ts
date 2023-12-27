@@ -35,6 +35,6 @@ function findSecond(first: string[], map: Record<string, string[]>) {
 }
 
 console.log("-----------------------");
-console.log("EX1 Test Result: ", await ex("25/test1"));
-console.log("EX1 Input Result: ", await ex("25/input"));
+console.log("EX1 Test Result: ", await ex("2023/25/test1"));
+console.log("EX1 Input Result: ", await ex("2023/25/input"));
 console.log("-----------------------");

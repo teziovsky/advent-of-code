@@ -188,9 +188,9 @@ function getNumberPairs(numbers: number[]) {
 }
 
 console.log("-----------------------");
-console.log("EX1 Test Result: ", await ex1("11/test1"));
-console.log("EX1 Input Result: ", await ex1("11/input"));
+console.log("EX1 Test Result: ", await ex1("2023/11/test1"));
+console.log("EX1 Input Result: ", await ex1("2023/11/input"));
 console.log("-----------------------");
-console.log("EX2 Test Result: ", await ex2("11/test2"));
-console.log("EX2 Result: ", await ex2("11/input"));
+console.log("EX2 Test Result: ", await ex2("2023/11/test2"));
+console.log("EX2 Result: ", await ex2("2023/11/input"));
 console.log("-----------------------");

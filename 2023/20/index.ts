@@ -200,8 +200,8 @@ function findFewestPresses(modules: Module[], buttonsPresses: Record<string, num
 }
 
 console.log("-----------------------");
-console.log("EX1 Test Result: ", await ex("20/test1", true));
-console.log("EX1 Input Result: ", await ex("20/input", true));
+console.log("EX1 Test Result: ", await ex("2023/20/test1", true));
+console.log("EX1 Input Result: ", await ex("2023/20/input", true));
 console.log("-----------------------");
-console.log("EX2 Result: ", await ex("20/input", false));
+console.log("EX2 Result: ", await ex("2023/20/input", false));
 console.log("-----------------------");

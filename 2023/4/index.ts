@@ -68,9 +68,9 @@ async function ex2(path: Path, delimiter: string = "\n") {
 }
 
 console.log("-----------------------");
-console.log("EX1 Test Result: ", await ex1("4/test1"));
-console.log("EX1 Input Result: ", await ex1("4/input"));
+console.log("EX1 Test Result: ", await ex1("2023/4/test1"));
+console.log("EX1 Input Result: ", await ex1("2023/4/input"));
 console.log("-----------------------");
-console.log("EX2 Test Result: ", await ex2("4/test2"));
-console.log("EX2 Input Result: ", await ex2("4/input"));
+console.log("EX2 Test Result: ", await ex2("2023/4/test2"));
+console.log("EX2 Input Result: ", await ex2("2023/4/input"));
 console.log("-----------------------");

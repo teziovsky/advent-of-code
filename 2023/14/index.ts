@@ -60,11 +60,11 @@ function rotateGrid(grid: string[][]) {
 
 let CYCLES_COUNT = 0;
 console.log("-----------------------");
-console.log("EX1 Test Result: ", await ex("14/test1", CYCLES_COUNT));
-console.log("EX1 Input Result: ", await ex("14/input", CYCLES_COUNT));
+console.log("EX1 Test Result: ", await ex("2023/14/test1", CYCLES_COUNT));
+console.log("EX1 Input Result: ", await ex("2023/14/input", CYCLES_COUNT));
 console.log("-----------------------");
 
 CYCLES_COUNT = 1_000;
-console.log("EX2 Test Result: ", await ex("14/test2", CYCLES_COUNT));
-console.log("EX2 Result: ", await ex("14/input", CYCLES_COUNT));
+console.log("EX2 Test Result: ", await ex("2023/14/test2", CYCLES_COUNT));
+console.log("EX2 Result: ", await ex("2023/14/input", CYCLES_COUNT));
 console.log("-----------------------");

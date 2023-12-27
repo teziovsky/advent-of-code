@@ -141,9 +141,9 @@ function calculateResults(bricks: number[][][], map: number[][][]) {
 }
 
 console.log("-----------------------");
-console.log("EX1 Test Result: ", await ex("22/test1"));
-console.log("EX1 Input Result: ", await ex("22/input"));
+console.log("EX1 Test Result: ", await ex("2023/22/test1"));
+console.log("EX1 Input Result: ", await ex("2023/22/input"));
 console.log("-----------------------");
-console.log("EX2 Test Result: ", await ex("22/test2", true));
-console.log("EX2 Result: ", await ex("22/input", true));
+console.log("EX2 Test Result: ", await ex("2023/22/test2", true));
+console.log("EX2 Result: ", await ex("2023/22/input", true));
 console.log("-----------------------");

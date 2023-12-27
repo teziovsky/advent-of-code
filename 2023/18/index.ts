@@ -104,9 +104,9 @@ function matchDirection(int: string) {
 }
 
 console.log("-----------------------");
-console.log("EX1 Test Result: ", await ex("18/test1"));
-console.log("EX1 Input Result: ", await ex("18/input"));
+console.log("EX1 Test Result: ", await ex("2023/18/test1"));
+console.log("EX1 Input Result: ", await ex("2023/18/input"));
 console.log("-----------------------");
-console.log("EX2 Test Result: ", await ex2("18/test2"));
-console.log("EX2 Result: ", await ex2("18/input"));
+console.log("EX2 Test Result: ", await ex2("2023/18/test2"));
+console.log("EX2 Result: ", await ex2("2023/18/input"));
 console.log("-----------------------");
