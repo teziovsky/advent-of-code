@@ -1,8 +1,11 @@
 {
   "type": "module",
-  "dependencies": {},
+  "dependencies": {
+    "lodash": "^4.17.21"
+  },
   "devDependencies": {
     "@total-typescript/ts-reset": "^0.5.1",
+    "@types/lodash": "^4.14.202",
     "bun-types": "^1.0.14"
   }
 }
