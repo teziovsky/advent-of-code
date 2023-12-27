@@ -46,7 +46,6 @@ function findSecond(first: string[], map: Record<string, string[]>) {
 
   while (first.reduce((count, key) => count + wrongCount(key), 0) !== 3) {
     second.push(first.sort((a, b) => wrongCount(a) - wrongCount(b)).pop()!);
-    console.log("first.length:", first.length);
   }
 
   return second;
