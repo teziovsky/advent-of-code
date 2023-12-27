@@ -1,4 +1,5 @@
-import { type Path, loadFile, sum } from "../../utils";
+import { sum } from "lodash";
+import { type Path, loadFile } from "../../utils";
 
 async function ex1(path: Path, delimiter: string = "\n") {
   const rows = (await loadFile(path, delimiter)).filter(Boolean);
@@ -133,14 +134,6 @@ async function ex2(path: Path, delimiter: string = "\n") {
   return sum(distances);
 }
 
-console.log("-----------------------");
-console.log("EX1 Test Result: ", await ex1("11/test1"));
-console.log("EX1 Input Result: ", await ex1("11/input"));
-console.log("-----------------------");
-console.log("EX2 Test Result: ", await ex2("11/test2"));
-console.log("EX2 Result: ", await ex2("11/input"));
-console.log("-----------------------");
-
 function duplicateRowColumn(grid: string[][], symbol = ".") {
   for (let i = 0; i < grid.length; i++) {
     if (!grid[i].includes("#")) {
@@ -193,3 +186,11 @@ function getNumberPairs(numbers: number[]) {
 
   return pairs;
 }
+
+console.log("-----------------------");
+console.log("EX1 Test Result: ", await ex1("11/test1"));
+console.log("EX1 Input Result: ", await ex1("11/input"));
+console.log("-----------------------");
+console.log("EX2 Test Result: ", await ex2("11/test2"));
+console.log("EX2 Result: ", await ex2("11/input"));
+console.log("-----------------------");

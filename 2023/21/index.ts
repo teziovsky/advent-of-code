@@ -45,14 +45,6 @@ async function ex2(path: Path, delimiter = "\n") {
   return a * d * d + b * d + c;
 }
 
-console.log("-----------------------");
-console.log("EX1 Test Result: ", await ex1("21/test1"));
-console.log("EX1 Input Result: ", await ex1("21/input"));
-console.log("-----------------------");
-console.log("EX2 Test Result: ", await ex2("21/test2"));
-console.log("EX2 Result: ", await ex2("21/input"));
-console.log("-----------------------");
-
 function safeModulo(coord: number, size: number) {
   return coord < 0 ? (size - (Math.abs(coord) % size)) % size : coord % size;
 }
@@ -95,3 +87,11 @@ function simplifyLagrange(values: number[]) {
     c: values[0],
   };
 }
+
+console.log("-----------------------");
+console.log("EX1 Test Result: ", await ex1("21/test1"));
+console.log("EX1 Input Result: ", await ex1("21/input"));
+console.log("-----------------------");
+console.log("EX2 Test Result: ", await ex2("21/test2"));
+console.log("EX2 Result: ", await ex2("21/input"));
+console.log("-----------------------");

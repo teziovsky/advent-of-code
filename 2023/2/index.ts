@@ -51,15 +51,6 @@ async function ex1(path: Path, delimiter: string = "\n") {
   }, 0);
 }
 
-function extractNumber(subset: string, color: string) {
-  return parseInt(
-    subset
-      .split(", ")
-      .filter((x) => x.includes(`${color}`))?.[0]
-      ?.replace(` ${color}`, "")
-  );
-}
-
 async function ex2(path: Path, delimiter: string = "\n") {
   const rows = await loadFile(path, delimiter);
 
@@ -99,6 +90,15 @@ async function ex2(path: Path, delimiter: string = "\n") {
 
     return acc + power;
   }, 0);
+}
+
+function extractNumber(subset: string, color: string) {
+  return parseInt(
+    subset
+      .split(", ")
+      .filter((x) => x.includes(`${color}`))?.[0]
+      ?.replace(` ${color}`, "")
+  );
 }
 
 console.log("-----------------------");

@@ -1,4 +1,5 @@
-import { type Path, loadFile, sum } from "../../utils";
+import { sum } from "lodash";
+import { type Path, loadFile } from "../../utils";
 
 async function ex1(path: Path, delimiter = "\n") {
   const [workflowsRows, ratingsRows] = (await loadFile(path, delimiter)).filter(Boolean);

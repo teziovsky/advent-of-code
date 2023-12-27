@@ -23,14 +23,6 @@ async function ex(path: Path, maxDifferencesCount: number, delimiter = "\n\n") {
   return result;
 }
 
-console.log("-----------------------");
-console.log("EX1 Test Result: ", await ex("13/test1", 0));
-console.log("EX1 Input Result: ", await ex("13/input", 0));
-console.log("-----------------------");
-console.log("EX2 Test Result: ", await ex("13/test2", 1));
-console.log("EX2 Result: ", await ex("13/input", 1));
-console.log("-----------------------");
-
 function rotateSegment(segment: string[][]) {
   return segment[0].map((_, rowIndex) => segment.map((_, colIndex) => segment[colIndex][rowIndex]));
 }
@@ -72,3 +64,11 @@ function checkMirror(segment: string[][], maxDifferencesCount: number) {
 
   return 0;
 }
+
+console.log("-----------------------");
+console.log("EX1 Test Result: ", await ex("13/test1", 0));
+console.log("EX1 Input Result: ", await ex("13/input", 0));
+console.log("-----------------------");
+console.log("EX2 Test Result: ", await ex("13/test2", 1));
+console.log("EX2 Result: ", await ex("13/input", 1));
+console.log("-----------------------");

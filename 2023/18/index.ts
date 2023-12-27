@@ -80,14 +80,6 @@ async function ex2(path: Path, delimiter = "\n") {
   return area;
 }
 
-console.log("-----------------------");
-console.log("EX1 Test Result: ", await ex("18/test1"));
-console.log("EX1 Input Result: ", await ex("18/input"));
-console.log("-----------------------");
-console.log("EX2 Test Result: ", await ex2("18/test2"));
-console.log("EX2 Result: ", await ex2("18/input"));
-console.log("-----------------------");
-
 function parseLine(line: string) {
   const [value] = line.match(/[0-9a-f]{6}/)!;
   const direction = value[5];
@@ -110,3 +102,11 @@ function matchDirection(int: string) {
       return "R";
   }
 }
+
+console.log("-----------------------");
+console.log("EX1 Test Result: ", await ex("18/test1"));
+console.log("EX1 Input Result: ", await ex("18/input"));
+console.log("-----------------------");
+console.log("EX2 Test Result: ", await ex2("18/test2"));
+console.log("EX2 Result: ", await ex2("18/input"));
+console.log("-----------------------");

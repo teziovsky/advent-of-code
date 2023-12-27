@@ -1,6 +1,6 @@
-import { type Path, loadFile, sum } from "../../utils";
+import { type Path, loadFile } from "../../utils";
 
-async function ex1(path: Path, delimiter = "\n") {
+async function ex(path: Path, delimiter = "\n") {
   const data = (await loadFile(path, delimiter)).filter(Boolean);
   const map = generateMap(data);
 
@@ -9,23 +9,6 @@ async function ex1(path: Path, delimiter = "\n") {
 
   return first.length * second.length;
 }
-
-async function ex2(path: Path, delimiter = "\n") {
-  const rows = (await loadFile(path, delimiter)).filter(Boolean);
-
-  return rows.reduce((acc, row) => {
-    if (!row) return acc;
-    return acc;
-  }, 0);
-}
-
-console.log("-----------------------");
-console.log("EX1 Test Result: ", await ex1("25/test1"));
-console.log("EX1 Input Result: ", await ex1("25/input"));
-console.log("-----------------------");
-// console.log("EX2 Test Result: ", await ex2("25/test2"));
-// console.log("EX2 Result: ", await ex2("25/input"));
-console.log("-----------------------");
 
 function generateMap(data: string[]) {
   return data.reduce<Record<string, string[]>>((acc, row) => {
@@ -50,3 +33,8 @@ function findSecond(first: string[], map: Record<string, string[]>) {
 
   return second;
 }
+
+console.log("-----------------------");
+console.log("EX1 Test Result: ", await ex("25/test1"));
+console.log("EX1 Input Result: ", await ex("25/input"));
+console.log("-----------------------");

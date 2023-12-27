@@ -1,4 +1,5 @@
-import { type Path, loadFile, sum } from "../../utils";
+import { sum } from "lodash";
+import { type Path, loadFile } from "../../utils";
 
 async function ex(path: Path, copies: number, delimiter: string = "\n") {
   const rows = (await loadFile(path, delimiter)).filter(Boolean).map((row) => row.split(" "));
@@ -18,14 +19,6 @@ async function ex(path: Path, copies: number, delimiter: string = "\n") {
 
   return sum(arrangements);
 }
-
-console.log("-----------------------");
-console.log("EX1 Test Result: ", await ex("12/test1", 1));
-console.log("EX1 Input Result: ", await ex("12/input", 1));
-console.log("-----------------------");
-console.log("EX2 Test Result: ", await ex("12/test2", 5));
-console.log("EX2 Result: ", await ex("12/input", 5));
-console.log("-----------------------");
 
 function getCombinations(str: string, numbers: number[], cache: Record<string, number>) {
   if (!str) {
@@ -64,3 +57,11 @@ function getCombinations(str: string, numbers: number[], cache: Record<string, n
   cache[key] = result;
   return result;
 }
+
+console.log("-----------------------");
+console.log("EX1 Test Result: ", await ex("12/test1", 1));
+console.log("EX1 Input Result: ", await ex("12/input", 1));
+console.log("-----------------------");
+console.log("EX2 Test Result: ", await ex("12/test2", 5));
+console.log("EX2 Result: ", await ex("12/input", 5));
+console.log("-----------------------");

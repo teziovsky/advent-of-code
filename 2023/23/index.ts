@@ -56,14 +56,6 @@ async function ex2(path: Path, delimiter = "\n") {
   return findLongestPath(finalPosition, distances, initialPosition);
 }
 
-console.log("-----------------------");
-console.log("EX1 Test Result: ", await ex1("23/test1"));
-console.log("EX1 Input Result: ", await ex1("23/input"));
-console.log("-----------------------");
-console.log("EX2 Test Result: ", await ex2("23/test2"));
-console.log("EX2 Result: ", await ex2("23/input"));
-console.log("-----------------------");
-
 async function createGraph(path: Path, delimiter: string) {
   return (await loadFile(path, delimiter))
     .filter(Boolean)
@@ -128,3 +120,11 @@ function findLongestPath(finalPosition: string, distances: Distances, initialPos
 
   return result;
 }
+
+console.log("-----------------------");
+console.log("EX1 Test Result: ", await ex1("23/test1"));
+console.log("EX1 Input Result: ", await ex1("23/input"));
+console.log("-----------------------");
+console.log("EX2 Test Result: ", await ex2("23/test2"));
+console.log("EX2 Result: ", await ex2("23/input"));
+console.log("-----------------------");

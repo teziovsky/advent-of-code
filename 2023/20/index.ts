@@ -51,13 +51,6 @@ async function ex(path: Path, isPart1: boolean, delimiter = "\n") {
   }
 }
 
-console.log("-----------------------");
-console.log("EX1 Test Result: ", await ex("20/test1", true));
-console.log("EX1 Input Result: ", await ex("20/input", true));
-console.log("-----------------------");
-console.log("EX2 Result: ", await ex("20/input", false));
-console.log("-----------------------");
-
 function getButtonsPresses(modules: Module[]) {
   const destModule = modules.find((mod) => mod.destinations.includes("rx"))!.inputs;
 
@@ -205,3 +198,10 @@ function findFewestPresses(modules: Module[], buttonsPresses: Record<string, num
     }
   }
 }
+
+console.log("-----------------------");
+console.log("EX1 Test Result: ", await ex("20/test1", true));
+console.log("EX1 Input Result: ", await ex("20/input", true));
+console.log("-----------------------");
+console.log("EX2 Result: ", await ex("20/input", false));
+console.log("-----------------------");

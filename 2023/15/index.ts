@@ -34,14 +34,6 @@ async function ex2(path: Path, delimiter = "\n") {
   }, 0);
 }
 
-console.log("-----------------------");
-console.log("EX1 Test Result: ", await ex1("15/test1", ","));
-console.log("EX1 Input Result: ", await ex1("15/input", ","));
-console.log("-----------------------");
-console.log("EX2 Test Result: ", await ex2("15/test2", ","));
-console.log("EX2 Result: ", await ex2("15/input", ","));
-console.log("-----------------------");
-
 function HASHMAP(step: string) {
   let value = 0;
 
@@ -53,3 +45,11 @@ function HASHMAP(step: string) {
 
   return value;
 }
+
+console.log("-----------------------");
+console.log("EX1 Test Result: ", await ex1("15/test1", ","));
+console.log("EX1 Input Result: ", await ex1("15/input", ","));
+console.log("-----------------------");
+console.log("EX2 Test Result: ", await ex2("15/test2", ","));
+console.log("EX2 Result: ", await ex2("15/input", ","));
+console.log("-----------------------");

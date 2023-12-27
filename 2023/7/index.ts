@@ -186,4 +186,3 @@ console.log("-----------------------");
 console.log("EX2 Test Result: ", await ex2("7/test2"));
 console.log("EX2 Result: ", await ex2("7/input"));
 console.log("-----------------------");
-248750699;
