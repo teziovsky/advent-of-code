@@ -1,6 +1,6 @@
 export type FileNames = "input" | `test${number}`;
 
-export type Path = `${number}/${number}/${FileNames}`;
+export type Path = `${number | "TEMPLATE_YEAR"}/${number}/${FileNames}`;
 
 export async function loadFile(path: Path, delimiter: string) {
   const file = Bun.file(`${import.meta.dir}/${path}.txt`);
