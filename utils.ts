@@ -15,3 +15,7 @@ export function GreatestCommonDivisor(...nums: number[]): number {
 export function LeastCommonMultiple(...nums: number[]) {
   return nums.reduce((acc, n) => (acc * n) / GreatestCommonDivisor(acc, n));
 }
+
+export function sum(arr: number[]) {
+  return arr.reduce((acc, v) => acc + v, 0);
+}

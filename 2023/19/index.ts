@@ -1,4 +1,4 @@
-import { type Path, loadFile } from "../../utils";
+import { type Path, loadFile, sum } from "../../utils";
 
 async function ex1(path: Path, delimiter = "\n") {
   const [workflowsRows, ratingsRows] = (await loadFile(path, delimiter)).filter(Boolean);
@@ -55,7 +55,7 @@ async function ex1(path: Path, delimiter = "\n") {
     }
 
     if (currentTarget === "A") {
-      result += Object.values(rating).reduce((acc, value) => acc + value, 0);
+      result += sum(Object.values(rating));
     }
   }
 

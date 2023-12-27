@@ -1,20 +1,20 @@
-import { type Path, loadFile } from "../../utils";
+import { type Path, loadFile, sum } from "../../utils";
 
 async function ex1(path: Path, delimiter: string = "\n") {
-  const rows = await (await loadFile(path, delimiter)).filter(Boolean).map((row) =>
+  const rows = (await loadFile(path, delimiter)).filter(Boolean).map((row) =>
     row
       .split("\n")
       .filter(Boolean)
       .map((el) => parseInt(el))
   );
 
-  const calories = rows.map((row) => row.reduce((acc, el) => acc + el, 0), 0);
+  const calories = rows.map(sum, 0);
 
   return Math.max(...calories);
 }
 
 async function ex2(path: Path, delimiter: string = "\n") {
-  const rows = await (await loadFile(path, delimiter)).filter(Boolean).map((row) =>
+  const rows = (await loadFile(path, delimiter)).filter(Boolean).map((row) =>
     row
       .split("\n")
       .filter(Boolean)
@@ -22,11 +22,11 @@ async function ex2(path: Path, delimiter: string = "\n") {
   );
 
   const calories = rows
-    .map((row) => row.reduce((acc, el) => acc + el, 0), 0)
+    .map(sum, 0)
     .sort((a, b) => b - a)
     .slice(0, 3);
 
-  return calories.reduce((acc, el) => acc + el, 0);
+  return sum(calories);
 }
 
 console.log("-----------------------");

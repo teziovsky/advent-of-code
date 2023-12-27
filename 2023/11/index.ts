@@ -1,4 +1,4 @@
-import { type Path, loadFile } from "../../utils";
+import { type Path, loadFile, sum } from "../../utils";
 
 async function ex1(path: Path, delimiter: string = "\n") {
   const rows = (await loadFile(path, delimiter)).filter(Boolean);
@@ -38,7 +38,7 @@ async function ex1(path: Path, delimiter: string = "\n") {
     distances.push(Math.abs(aY - bY) + Math.abs(aX - bX));
   }
 
-  return distances.reduce((acc, distance) => acc + distance, 0);
+  return sum(distances);
 }
 
 async function ex2(path: Path, delimiter: string = "\n") {
@@ -130,7 +130,7 @@ async function ex2(path: Path, delimiter: string = "\n") {
     distances.push(distance);
   }
 
-  return distances.reduce((acc, distance) => acc + distance, 0);
+  return sum(distances);
 }
 
 console.log("-----------------------");

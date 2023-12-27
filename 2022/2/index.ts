@@ -1,4 +1,4 @@
-import { type Path, loadFile } from "../../utils";
+import { type Path, loadFile, sum } from "../../utils";
 
 const opponent: Record<string, string> = {
   A: "rock",
@@ -43,7 +43,7 @@ async function ex1(path: Path, delimiter = "\n") {
     }
   }
 
-  return results.reduce((acc, el) => acc + el, 0);
+  return sum(results);
 }
 
 async function ex2(path: Path, delimiter = "\n") {
@@ -74,7 +74,7 @@ async function ex2(path: Path, delimiter = "\n") {
     }
   }
 
-  return results.reduce((acc, el) => acc + el, 0);
+  return sum(results);
 }
 
 console.log("-----------------------");
